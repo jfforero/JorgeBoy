@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio Profesional | Proyectos Destacados</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            accent: '#06b6d4'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts & Lucide Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Glassmorphism effects */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .dark .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+        }
+
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Gradient animations */
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #4f46e5 0%, #0891b2 100%);
+        }
+
+        /* Modal styling */
+        .modal-backdrop {
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.5);
+            border-radius: 9999px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: rgba(51, 65, 85, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-40 transition-all duration-300 py-4 px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto">
+            <nav class="glass-panel rounded-2xl px-6 py-3 flex items-center justify-between shadow-lg shadow-slate-900/5 dark:shadow-none">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 font-bold text-xl tracking-tight">
+                    <span class="p-2 rounded-xl gradient-bg text-white shadow-md shadow-indigo-500/20">
+                        <i data-lucide="code-2" class="w-5 h-5"></i>
+                    </span>
+                    <span class="hidden sm:inline">Alex<span class="gradient-text">.Dev</span></span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
+                    <a href="#hero" class="hover:text-brand-500 dark:hover:text-brand-accent transition-colors">Inicio</a>
+                    <a href="#trabajos" class="hover:text-brand-500 dark:hover:text-brand-accent transition-colors">Mis Trabajos</a>
+                    <a href="#skills" class="hover:text-brand-500 dark:hover:text-brand-accent transition-colors">Habilidades</a>
+                    <a href="#contacto" class="hover:text-brand-500 dark:hover:text-brand-accent transition-colors">Contacto</a>
+                </div>
+
+                <!-- Theme Toggle & Actions -->
+                <div class="flex items-center gap-3">
+                    <button id="themeToggle" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" aria-label="Cambiar tema">
+                        <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                        <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                    </button>
+                    <a href="#contacto" class="hidden sm:inline-flex px-4 py-2 text-sm font-semibold text-white gradient-bg rounded-xl shadow-md hover:opacity-90 transition-all transform hover:-translate-y-0.5">
+                        Hablemos
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-24">
+        <!-- Hero Section -->
+        <section id="hero" class="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
+            <!-- Background Glows -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-indigo-500/10 dark:bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute top-1/3 right-10 w-72 h-72 bg-cyan-500/10 dark:bg-cyan-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center max-w-3xl mx-auto">
+                    <!-- Status Badge -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-slate-200 dark:border-slate-800 text-xs font-semibold text-brand-600 dark:text-brand-accent mb-6 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Disponible para proyectos freelance y full-time
+                    </div>
+
+                    <!-- Title -->
+                    <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                        Transformando ideas en <br class="hidden sm:inline"/>
+                        <span class="gradient-text">experiencias digitales</span> excepcionales.
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-8 font-normal leading-relaxed">
+                        Desarrollador Full Stack & Diseñador UI/UX. Me especializo en construir aplicaciones web modernas, rápidas e interactivas con arquitectura limpia.
+                    </p>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <a href="#trabajos" class="w-full sm:w-auto px-8 py-3.5 rounded-xl font-semibold text-white gradient-bg shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+                            Explorar Proyectos
+                            <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#contacto" class="w-full sm:w-auto px-8 py-3.5 rounded-xl font-semibold glass-card hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all border border-slate-200 dark:border-slate-800 flex items-center justify-center gap-2">
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+                            Contáctame
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Works Section -->
+        <section id="trabajos" class="py-20 relative bg-slate-100/50 dark:bg-slate-900/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Section Header -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                    <div>
+                        <div class="text-brand-500 dark:text-brand-accent text-sm font-bold tracking-widest uppercase mb-2">Portafolio Seleccionado</div>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Mis Trabajos Destacados</h2>
+                    </div>
+
+                    <!-- Category Filter Buttons -->
+                    <div class="flex flex-wrap gap-2 p-1.5 glass-card rounded-2xl border border-slate-200 dark:border-slate-800" id="filterContainer">
+                        <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all bg-brand-600 text-white shadow-sm">
+                            Todos (3)
+                        </button>
+                        <button data-filter="web-app" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+                            Web Apps
+                        </button>
+                        <button data-filter="fullstack" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+                            Full Stack
+                        </button>
+                        <button data-filter="ux-ui" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+                            UI/UX
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Projects Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8" id="projectsGrid">
+                    
+                    <!-- Proyecto 1 -->
+                    <article class="project-card group glass-card rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-500/10 flex flex-col" data-category="fullstack">
+                        <!-- Image Container with Zoom -->
+                        <div class="relative overflow-hidden h-56 bg-slate-800">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Nexus Analytics Dashboard" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+                            
+                            <!-- Category Badge -->
+                            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-500/90 text-white backdrop-blur-md shadow-md">
+                                Full Stack
+                            </span>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-brand-500 dark:group-hover:text-brand-accent transition-colors">
+                                Nexus Analytics Platform
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 line-clamp-2">
+                                Plataforma empresarial de analítica e inteligencia de datos en tiempo real con tableros interactivos y reportes automatizados.
+                            </p>
+
+                            <!-- Tech Badges -->
+                            <div class="flex flex-wrap gap-2 mb-6 mt-auto">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">React</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Node.js</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Tailwind</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">PostgreSQL</span>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+                                <button onclick="openModal(0)" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold text-white gradient-bg shadow-sm hover:opacity-90 transition-all flex items-center justify-center gap-1.5">
+                                    <i data-lucide="eye" class="w-4 h-4"></i> Ver Proyecto
+                                </button>
+                                <a href="https://github.com" target="_blank" rel="noopener" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors" title="Código Fuente">
+                                    <i data-lucide="github" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 2 -->
+                    <article class="project-card group glass-card rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-500/10 flex flex-col" data-category="web-app">
+                        <!-- Image Container with Zoom -->
+                        <div class="relative overflow-hidden h-56 bg-slate-800">
+                            <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80" alt="FlowSpace Workspace App" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+                            
+                            <!-- Category Badge -->
+                            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/90 text-white backdrop-blur-md shadow-md">
+                                Web App
+                            </span>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-brand-500 dark:group-hover:text-brand-accent transition-colors">
+                                FlowSpace Workspace
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 line-clamp-2">
+                                Aplicación SaaS de productividad para equipos remotos con tableros Kanban, chat en tiempo real y sincronización en la nube.
+                            </p>
+
+                            <!-- Tech Badges -->
+                            <div class="flex flex-wrap gap-2 mb-6 mt-auto">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Next.js</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">TypeScript</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Firebase</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Zustand</span>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+                                <button onclick="openModal(1)" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold text-white gradient-bg shadow-sm hover:opacity-90 transition-all flex items-center justify-center gap-1.5">
+                                    <i data-lucide="eye" class="w-4 h-4"></i> Ver Proyecto
+                                </button>
+                                <a href="https://github.com" target="_blank" rel="noopener" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors" title="Código Fuente">
+                                    <i data-lucide="github" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Proyecto 3 -->
+                    <article class="project-card group glass-card rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-indigo-500/10 flex flex-col" data-category="ux-ui">
+                        <!-- Image Container with Zoom -->
+                        <div class="relative overflow-hidden h-56 bg-slate-800">
+                            <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=800&q=80" alt="Aura Health Mobile App" class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+                            
+                            <!-- Category Badge -->
+                            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/90 text-white backdrop-blur-md shadow-md">
+                                UX/UI Design
+                            </span>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold mb-2 group-hover:text-brand-500 dark:group-hover:text-brand-accent transition-colors">
+                                Aura Health & Wellness
+                            </h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mb-6 line-clamp-2">
+                                Rediseño completo de experiencia de usuario y sistema de diseño para app móvil enfocada en la salud mental y bienestar integral.
+                            </p>
+
+                            <!-- Tech Badges -->
+                            <div class="flex flex-wrap gap-2 mb-6 mt-auto">
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Figma</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Design System</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Prototyping</span>
+                                <span class="px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">User Testing</span>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="flex items-center gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+                                <button onclick="openModal(2)" class="flex-1 py-2.5 px-4 rounded-xl text-xs font-bold text-white gradient-bg shadow-sm hover:opacity-90 transition-all flex items-center justify-center gap-1.5">
+                                    <i data-lucide="eye" class="w-4 h-4"></i> Ver Proyecto
+                                </button>
+                                <a href="https://figma.com" target="_blank" rel="noopener" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition-colors" title="Figma Prototype">
+                                    <i data-lucide="figma" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16">
+                    <div class="text-brand-500 dark:text-brand-accent text-sm font-bold tracking-widest uppercase mb-2">Stack Tecnológico</div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Herramientas y Habilidades</h2>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="p-6 glass-card rounded-2xl border border-slate-200 dark:border-slate-800 text-center hover:border-brand-500/50 transition-colors">
+                        <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-indigo-500/10 text-brand-500 flex items-center justify-center">
+                            <i data-lucide="layout" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-base mb-1">Frontend</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">React, Next.js, TypeScript, Tailwind CSS</p>
+                    </div>
+
+                    <div class="p-6 glass-card rounded-2xl border border-slate-200 dark:border-slate-800 text-center hover:border-brand-500/50 transition-colors">
+                        <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-cyan-500/10 text-brand-accent flex items-center justify-center">
+                            <i data-lucide="server" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-base mb-1">Backend</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Node.js, Express, Python, REST APIs</p>
+                    </div>
+
+                    <div class="p-6 glass-card rounded-2xl border border-slate-200 dark:border-slate-800 text-center hover:border-brand-500/50 transition-colors">
+                        <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+                            <i data-lucide="database" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-base mb-1">Bases de Datos</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">PostgreSQL, MongoDB, Redis, Supabase</p>
+                    </div>
+
+                    <div class="p-6 glass-card rounded-2xl border border-slate-200 dark:border-slate-800 text-center hover:border-brand-500/50 transition-colors">
+                        <div class="w-12 h-12 mx-auto mb-4 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center">
+                            <i data-lucide="figma" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-base mb-1">Diseño UI/UX</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Figma, Wireframing, User Research</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contacto" class="py-20 bg-slate-100/50 dark:bg-slate-900/30 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    
+                    <!-- Contact Info -->
+                    <div>
+                        <div class="text-brand-500 dark:text-brand-accent text-sm font-bold tracking-widest uppercase mb-2">¿Tienes un proyecto en mente?</div>
+                        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-6">Trabajemos juntos.</h2>
+                        <p class="text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
+                            Estoy disponible para nuevas oportunidades de desarrollo, colaboraciones o consultas. ¡Envíame un mensaje y te responderé lo antes posible!
+                        </p>
+
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-4 p-3 rounded-2xl glass-card border border-slate-200 dark:border-slate-800">
+                                <div class="p-3 rounded-xl gradient-bg text-white">
+                                    <i data-lucide="mail" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400">Email</div>
+                                    <div class="font-semibold text-sm">alex.developer@example.com</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4 p-3 rounded-2xl glass-card border border-slate-200 dark:border-slate-800">
+                                <div class="p-3 rounded-xl gradient-bg text-white">
+                                    <i data-lucide="map-pin" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-slate-500 dark:text-slate-400">Ubicación</div>
+                                    <div class="font-semibold text-sm">Santiago, Chile (Remoto)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Networks -->
+                        <div class="flex gap-3">
+                            <a href="https://github.com" target="_blank" class="p-3 rounded-xl glass-card border border-slate-200 dark:border-slate-800 hover:border-brand-500/50 transition-colors">
+                                <i data-lucide="github" class="w-5 h-5"></i>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" class="p-3 rounded-xl glass-card border border-slate-200 dark:border-slate-800 hover:border-brand-500/50 transition-colors">
+                                <i data-lucide="linkedin" class="w-5 h-5"></i>
+                            </a>
+                            <a href="https://twitter.com" target="_blank" class="p-3 rounded-xl glass-card border border-slate-200 dark:border-slate-800 hover:border-brand-500/50 transition-colors">
+                                <i data-lucide="twitter" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Form -->
+                    <div class="glass-panel p-8 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-800">
+                        <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-sm font-semibold mb-2">Nombre completo</label>
+                                <input type="text" id="name" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all text-sm" placeholder="Ej. Ana García">
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-semibold mb-2">Correo Electrónico</label>
+                                <input type="email" id="email" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all text-sm" placeholder="ana@ejemplo.com">
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-sm font-semibold mb-2">Mensaje</label>
+                                <textarea id="message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all text-sm" placeholder="Cuéntame sobre tu proyecto..."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded-xl text-sm font-bold text-white gradient-bg shadow-lg shadow-indigo-500/25 hover:opacity-90 transition-all flex items-center justify-center gap-2">
+                                <i data-lucide="send" class="w-4 h-4"></i> Enviar Mensaje
+                            </button>
+                        </form>
+
+                        <!-- Notification Container -->
+                        <div id="formSuccess" class="hidden mt-4 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-sm text-center font-medium">
+                            ¡Gracias por tu mensaje! Me pondré en contacto contigo muy pronto.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 Alex.Dev - Portafolio Profesional. Todos los derechos reservados.</p>
+            <p class="flex items-center gap-1">Diseñado con <i data-lucide="heart" class="w-3.5 h-3.5 text-red-500 fill-red-500"></i> y Tailwind CSS</p>
+        </div>
+    </footer>
+
+    <!-- Project Details Modal -->
+    <div id="projectModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 hidden">
+        <!-- Backdrop -->
+        <div class="modal-backdrop absolute inset-0" onclick="closeModal()"></div>
+
+        <!-- Modal Card -->
+        <div class="relative glass-panel w-full max-w-3xl rounded-3xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 max-h-[90vh] flex flex-col z-10 animate-in fade-in zoom-in duration-200">
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                <div>
+                    <span id="modalCategory" class="text-xs font-bold text-brand-500 uppercase tracking-wider"></span>
+                    <h3 id="modalTitle" class="text-2xl font-bold text-slate-900 dark:text-white"></h3>
+                </div>
+                <button onclick="closeModal()" class="p-2 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content (Scrollable) -->
+            <div class="p-6 overflow-y-auto space-y-6">
+                <!-- Project Main Image -->
+                <div class="rounded-2xl overflow-hidden h-64 sm:h-80 bg-slate-800 relative">
+                    <img id="modalImage" src="" alt="Detalle del proyecto" class="w-full h-full object-cover">
+                </div>
+
+                <!-- Problem & Solution Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-4 rounded-2xl glass-card border border-slate-200 dark:border-slate-800">
+                        <h4 class="font-bold text-sm text-brand-500 mb-2 flex items-center gap-2">
+                            <i data-lucide="alert-circle" class="w-4 h-4"></i> El Desafío
+                        </h4>
+                        <p id="modalChallenge" class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"></p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl glass-card border border-slate-200 dark:border-slate-800">
+                        <h4 class="font-bold text-sm text-emerald-500 mb-2 flex items-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-4 h-4"></i> La Solución
+                        </h4>
+                        <p id="modalSolution" class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed"></p>
+                    </div>
+                </div>
+
+                <!-- Tech Stack & Features -->
+                <div>
+                    <h4 class="font-bold text-sm mb-3">Tecnologías Utilizadas</h4>
+                    <div id="modalTech" class="flex flex-wrap gap-2"></div>
+                </div>
+            </div>
+
+            <!-- Modal Footer / Actions -->
+            <div class="p-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-end gap-3 bg-slate-50/50 dark:bg-slate-900/50">
+                <button onclick="closeModal()" class="px-5 py-2.5 rounded-xl text-xs font-semibold border border-slate-200 dark:border-slate-800 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    Cerrar
+                </button>
+                <a id="modalDemoLink" href="#" target="_blank" class="px-5 py-2.5 rounded-xl text-xs font-bold text-white gradient-bg shadow-md hover:opacity-90 transition-all flex items-center gap-2">
+                    <i data-lucide="external-link" class="w-4 h-4"></i> Ver Demo En Vivo
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Projects Data Structure
+        const projectsData = [
+            {
+                title: "Nexus Analytics Platform",
+                category: "Full Stack",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+                challenge: "El cliente requería procesar millones de eventos diarios y visualizarlos en tiempo real sin latencia en la interfaz del usuario.",
+                solution: "Desarrollamos una arquitectura basada en Node.js con WebSockets y agregación distribuida en PostgreSQL, logrando tiempos de renderizado inferiores a 100ms.",
+                tech: ["React", "Node.js", "Tailwind CSS", "PostgreSQL", "WebSockets", "Docker"],
+                demoUrl: "https://example.com"
+            },
+            {
+                title: "FlowSpace Workspace",
+                category: "Web App",
+                image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
+                challenge: "Los equipos remotos sufrían por la dispersión de herramientas de comunicación y gestión de proyectos.",
+                solution: "Creamos un espacio de trabajo unificado en Next.js que integra pizarras interactivas, notas colaborativas y tableros en un único tablero fluido.",
+                tech: ["Next.js", "TypeScript", "Firebase", "Zustand", "Tailwind CSS"],
+                demoUrl: "https://example.com"
+            },
+            {
+                title: "Aura Health & Wellness",
+                category: "UX/UI Design",
+                image: "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=800&q=80",
+                challenge: "Una app con alta tasa de abandono debido a una navegación compleja y saturación cognitiva de opciones.",
+                solution: "Rediseño centrado en la usabilidad con pruebas A/B, creando una interfaz minimalista con tonos relajantes y una navegación por pestañas simplificada.",
+                tech: ["Figma", "Design System", "Prototyping", "User Research"],
+                demoUrl: "https://figma.com"
+            }
+        ];
+
+        // Dark / Light Theme Toggle Setup
+        const themeToggleBtn = document.getElementById('themeToggle');
+        
+        themeToggleBtn.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Modal Functionality
+        function openModal(index) {
+            const project = projectsData[index];
+            if (!project) return;
+
+            document.getElementById('modalTitle').textContent = project.title;
+            document.getElementById('modalCategory').textContent = project.category;
+            document.getElementById('modalImage').src = project.image;
+            document.getElementById('modalChallenge').textContent = project.challenge;
+            document.getElementById('modalSolution').textContent = project.solution;
+            document.getElementById('modalDemoLink').href = project.demoUrl;
+
+            // Render Tech Badges
+            const techContainer = document.getElementById('modalTech');
+            techContainer.innerHTML = '';
+            project.tech.forEach(t => {
+                const badge = document.createElement('span');
+                badge.className = 'px-3 py-1 rounded-lg text-xs font-semibold bg-brand-50 dark:bg-slate-800 text-brand-600 dark:text-brand-accent border border-brand-100 dark:border-slate-700';
+                badge.textContent = t;
+                techContainer.appendChild(badge);
+            });
+
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Category Filter Logic
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update Active Button State
+                filterButtons.forEach(b => {
+                    b.classList.remove('active', 'bg-brand-600', 'text-white', 'shadow-sm');
+                    b.classList.add('text-slate-600', 'dark:text-slate-400');
+                });
+                btn.classList.add('active', 'bg-brand-600', 'text-white', 'shadow-sm');
+                btn.classList.remove('text-slate-600', 'dark:text-slate-400');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Form Submit Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const successBox = document.getElementById('formSuccess');
+            const form = document.getElementById('contactForm');
+            
+            successBox.classList.remove('hidden');
+            form.reset();
+
+            setTimeout(() => {
+                successBox.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
